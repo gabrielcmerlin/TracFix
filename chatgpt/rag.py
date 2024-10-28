@@ -18,48 +18,47 @@ client = OpenAI(api_key=openai_key)
 #Abrindo o Pinecone
 pc = Pinecone(api_key=pinecone_key)
 index_name = "tractian"
-
-while not pc.describe_index(index_name).status['ready']:
-    print("Não consegui conectar no Pinecone")
-
 index = pc.Index(index_name)
-
-
-#Lendo o input e gerando seu embedding
-audio = "Bom dia, Osvaldo, tudo certo? Passando para a gente alinhar as coisas que ficaram pendentes para a gente fazer no domingo. Um cara com serviços que acabaram que a gente não conseguiu tocar durante semana, mas deixa eu explicar aqui para vocês algumas coisas que a gente tem que resolver logo, tá bom? Então, conhecendo pela linha 3, eu preciso que façam a alunificação dos rolamentos ali. Essa máquina ali, ela já está dando sinais de esgar, já tem um certo tempo. O pessoal reportou já barulho estranho, já nesse equipamento, então tem que botar o lubrificante correto, ele já está no estoque, que ele código lá o azul 6624, então já toma cuidado com isso, já faz essa lubrificação com essa máquina aí, e não pode esquecer de conferir a fichia técnica dele para colocar a quantidade certa, tal, outra vez deu problema. Então depois disso eu preciso também que vocês dê uma verificada no nível de óleo lá da desencapadora, lá da linha 12, É um equipamento que, do nada, dá uns picos de temperatura lá, o pessoal já reportou, já mandou para a gerência, foi uma merda isso. Então, revisar mesmo as medições, ver se está tudo certo lá com o nível de óleo dela, porque se saiu do óleo recometado, ela vai começar a esquentar e com o risco de parar aí, vai dar BO. e também queria que a gente precisa dar uma olhada lá no compressor 5 aquele lá bem da central né o filtro de A já passou do ponto ele tava pra ser trocado na última parada mas ele acabou ficando pra agora então tá bem crítico então tem que fazer substituição agora agora no domingo já não dá pra esperar o filtro de novo já pexei mandei o menino trazer lá do almoxarifado tá debaixo da bancada só vocês pegarem e trocar também, tá? E aproveita que você tá no compressor, aproveita e dá um polinho lá naquela bomba da bomba de circulação, aquela lá do canto, do canto direito, ela também tava, o pessoal falou que ela tá fazendo barulho, aproveita e dá uma olhadinha lá pra mim, tá? Basicamente isso, qualquer coisa aí você não me avisa, tá? Porque eu tô de folga, eu seguramente resolve. Valeu!"
-
-input = f"Leia o seguinte texto: {audio}. Ignore opiniões e saudações e gere instruções para cada tarefa solicitada. Cada instrução deve conter um passo a passo de como realizar e as ferramentas necessárias, junto de seus nomes e códigos. Escreva em formato JSON."
-
 
 def get_embedding(text, model="text-embedding-3-small"):
    text = text.replace("\n", " ")
    return client.embeddings.create(input = [text], model=model).data[0].embedding
 
-input_embedding = get_embedding(input)
 
+def get_question():
+    while not pc.describe_index(index_name).status['ready']:
+        print("Não consegui conectar no Pinecone")
 
+    #Lendo o input e gerando seu embedding
+    audio = "Bom dia, Osvaldo, tudo certo? Passando para a gente alinhar as coisas que ficaram pendentes para a gente fazer no domingo. Um cara com serviços que acabaram que a gente não conseguiu tocar durante semana, mas deixa eu explicar aqui para vocês algumas coisas que a gente tem que resolver logo, tá bom? Então, conhecendo pela linha 3, eu preciso que façam a alunificação dos rolamentos ali. Essa máquina ali, ela já está dando sinais de esgar, já tem um certo tempo. O pessoal reportou já barulho estranho, já nesse equipamento, então tem que botar o lubrificante correto, ele já está no estoque, que ele código lá o azul 6624, então já toma cuidado com isso, já faz essa lubrificação com essa máquina aí, e não pode esquecer de conferir a fichia técnica dele para colocar a quantidade certa, tal, outra vez deu problema. Então depois disso eu preciso também que vocês dê uma verificada no nível de óleo lá da desencapadora, lá da linha 12, É um equipamento que, do nada, dá uns picos de temperatura lá, o pessoal já reportou, já mandou para a gerência, foi uma merda isso. Então, revisar mesmo as medições, ver se está tudo certo lá com o nível de óleo dela, porque se saiu do óleo recometado, ela vai começar a esquentar e com o risco de parar aí, vai dar BO. e também queria que a gente precisa dar uma olhada lá no compressor 5 aquele lá bem da central né o filtro de A já passou do ponto ele tava pra ser trocado na última parada mas ele acabou ficando pra agora então tá bem crítico então tem que fazer substituição agora agora no domingo já não dá pra esperar o filtro de novo já pexei mandei o menino trazer lá do almoxarifado tá debaixo da bancada só vocês pegarem e trocar também, tá? E aproveita que você tá no compressor, aproveita e dá um polinho lá naquela bomba da bomba de circulação, aquela lá do canto, do canto direito, ela também tava, o pessoal falou que ela tá fazendo barulho, aproveita e dá uma olhadinha lá pra mim, tá? Basicamente isso, qualquer coisa aí você não me avisa, tá? Porque eu tô de folga, eu seguramente resolve. Valeu!"
 
-# Define how many matches to retrieve
-num_matches = 10
+    input = f"Leia o seguinte texto: {audio}. Ignore opiniões e saudações e gere instruções para cada tarefa solicitada. Cada instrução deve conter um passo a passo de como realizar e as ferramentas necessárias, junto de seus nomes e códigos. Escreva em formato JSON."
 
-# Query the index with the input embedding
-results = index.query(vector=input_embedding, top_k=num_matches, include_metadata=True)
+    input_embedding = get_embedding(input)
 
-# Extract text of the relevant chunks
-relevant_chunks = [match['metadata']['text'] for match in results['matches']]
-#print("Relevant Chunks:", relevant_chunks)
+    # Define how many matches to retrieve
+    num_matches = 10
 
-context = "\n\n".join(relevant_chunks)
+    # Query the index with the input embedding
+    results = index.query(vector=input_embedding, top_k=num_matches, include_metadata=True)
 
-completion = client.chat.completions.create(
-    model="gpt-4o",
-    messages=[
-        {"role": "system", "content": "Você é um assistente muito solícito para operários de uma fábrica. Você responde perguntas com base em contextos fornecido previamente."},
-        {
-          "role": "user", 
-          "content": f"Contexto:\n{context}\n\nPergunta: {input}"
-       }
-    ]
-)
+    # Extract text of the relevant chunks
+    relevant_chunks = [match['metadata']['text'] for match in results['matches']]
+    #print("Relevant Chunks:", relevant_chunks)
 
-print(completion.choices[0].message.content)
+    context = "\n\n".join(relevant_chunks)
+
+    completion = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": "Você é um assistente muito solícito para operários de uma fábrica. Você responde perguntas com base em contextos fornecido previamente."},
+            {
+            "role": "user", 
+            "content": f"Contexto:\n{context}\n\nPergunta: {input}"
+        }
+        ]
+    )
+
+    print(completion.choices[0].message.content)
+
+#get_question()
