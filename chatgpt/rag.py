@@ -2,7 +2,6 @@ from openai import OpenAI
 import fitz  # PyMuPDF
 from pinecone import Pinecone, ServerlessSpec
 import json
-import requests
 import os
 from dotenv import load_dotenv
 
@@ -53,6 +52,27 @@ def get_question():
 
     Não escreva nada além do JSON.
     """
+    input = f"""Leia o seguinte texto: {audio}. Ignore opiniões e saudações e gere instruções para cada tarefa solicitada. 
+    Cada instrução deve conter um passo a passo de como realizar e as ferramentas necessárias, junto de seus nomes e códigos. 
+    Escreva uma lista de JSONs. Deve haver n JSONS, um para cada tarefa. Cada JSON deve conter um campo para cada ferramenta junto de seu código, 
+    um campo para cada instrução e um título, que deve ser escrito apenas com letras minúsculas e sem espaços, como um nome de arquivo.
+    Exemplo: 
+    [
+        {{
+        'titulo': 'engraxar_rolamentos',
+        ' passo_a_passo': '1. passo1, 2. passo2, n. passon',
+        'ferramentas': '1. ferramenta1, 2. ferramenta2, n. ferramentan'
+        }},
+
+        {{
+        'titulo': 'montar_cadeira',
+        ' passo_a_passo': '1. passo1, 2. passo2, n. passon',
+        'ferramentas': '1. ferramenta1, 2. ferramenta2, n. ferramentan
+        }},
+    ]
+
+    Não escreva nada além do JSON.
+    """
 
     input_embedding = get_embedding(input)
 
@@ -80,6 +100,4 @@ def get_question():
         ]
     )
 
-    #print(completion.choices[0].message.content)
-
-get_question()
+    return completion.choices[0].message.content
