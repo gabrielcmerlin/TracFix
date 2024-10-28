@@ -8,4 +8,6 @@ TracFix é uma ferramenta que permite gerar ordens de serviço a partir de áudi
 - **Banco de Dados**: O sistema conta com uma base de dados que armazena manuais de máquinas, planilhas de ferramentas e outros documentos em formato de embeddings, utilizando Pinecone.
 - **Ordens de Serviço**: Para cada instrução dada pelo chefe através do áudio, é gerado um pdf no formato padrão de uma Ordem de Serviço da Gearing.
 
+Um vídeo demonstração pode ser conferido na descrição do repositório.
+
 Feito por Artur Lima, Gabriel Merlin, Lucas Brandão e Pedro Delgado (@grupo.raia).
