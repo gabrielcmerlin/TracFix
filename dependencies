@@ -1,3 +1,4 @@
 pip install openai
 sudo apt install curl
 pip install pymupdf
+pip install pinecone-client
