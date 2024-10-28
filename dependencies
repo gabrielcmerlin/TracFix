@@ -1,2 +1,3 @@
 pip install openai
 sudo apt install curl
+pip install pymupdf
