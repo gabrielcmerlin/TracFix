@@ -64,8 +64,6 @@ def get_question():
 
     # Extract text of the relevant chunks
     relevant_chunks = [match['metadata']['text'] for match in results['matches']]
-    for i,chunk in enumerate(relevant_chunks):
-        print(f"Relevant Chunk {i}: {chunk}")
 
     context = "\n\n".join(relevant_chunks)
 
@@ -80,6 +78,4 @@ def get_question():
         ]
     )
 
-    #print(completion.choices[0].message.content)
-
-get_question()
+    return completion.choices[0].message.content

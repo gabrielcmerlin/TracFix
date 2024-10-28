@@ -5,6 +5,7 @@ import json
 import requests
 import os
 from dotenv import load_dotenv
+import re
 
 #------------------------------------------LENDO PDF E TRANSFORMANDO EM CHUNKS DE TEXTO----------------------------------#
 
@@ -19,9 +20,21 @@ def extract_text_from_pdf(pdf_path):
 def chunk_text(text, max_words=150):
     words = text.split()
     chunks = []
-    for i in range(0, len(words), max_words):
-        chunk = " ".join(words[i:i + max_words])
+    cleaned_words = []
+    
+    # Define unwanted patterns
+    unwanted_patterns = re.compile(r'^\b(O+|NA|S|\d+(\.\d{1,3})?|\d+(,\d{1,3})?)\b$')
+    
+    # Filter words based on unwanted patterns
+    for word in words:
+        if not unwanted_patterns.match(word):
+            cleaned_words.append(word)
+
+    # Create chunks from cleaned words
+    for i in range(0, len(cleaned_words), max_words):
+        chunk = " ".join(cleaned_words[i:i + max_words])
         chunks.append(chunk)
+    
     return chunks
 
 pdf_path = "./codigos.pdf"
@@ -30,7 +43,7 @@ print(pdf_path.split("./")[1])
 
 chunks = chunk_text(file_content)
 print(f"Created {len(chunks)} chunks.")
-#print("Sample Chunk:", chunks[0])
+
 
 #-------------------------------------------------GERANDO EMBEDDINGS E UPANDO NO PINECONE--------------------------------------------------#
 
