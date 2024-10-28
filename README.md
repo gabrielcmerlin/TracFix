@@ -5,6 +5,7 @@ TracFix é uma ferramenta que permite gerar ordens de serviço a partir de áudi
 
 - **Encaminhamento de áudio para o Bot**: O usuário encaminha o áudio recebido no WhatsApp para o bot da TracFix no Telegram, um processo simples e intuitivo.
 - **Transcrição e Geração de Ordens de Serviço**: O bot transcreve o áudio recebido e utiliza a API do ChatGPT para gerar ordens de serviço a partir da transcrição.
-- **Banco de Dados**: O sistema conta com uma base de dados que armazena manuais de máquinas, planilhas de ferramentas e outros documentos em formato de embeddings, utilizando PineCone.
+- **Banco de Dados**: O sistema conta com uma base de dados que armazena manuais de máquinas, planilhas de ferramentas e outros documentos em formato de embeddings, utilizando Pinecone.
+- **Ordens de Serviço**: Para cada instrução dada pelo chefe através do áudio, é gerado um pdf no formato padrão de uma Ordem de Serviço da Gearing.
 
-Feito por Artur Lima, Gabriel Merlin, Lucas Brandao e Pedro Delgado (@grupo.raia).
+Feito por Artur Lima, Gabriel Merlin, Lucas Brandão e Pedro Delgado (@grupo.raia).
