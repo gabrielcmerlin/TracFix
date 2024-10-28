@@ -1,0 +1,2 @@
+pip install openai
+sudo apt install curl
