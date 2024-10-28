@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ordem de Serviço</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Custom styles */
+    body {
+      font-size: 1.5rem; /* Define o tamanho de fonte maior para todo o corpo */
+    }
+    header {
+      background-color: #002244;
+      padding: 1rem;
+    }
+    header img {
+      height: 30px;
+    }
+    main {
+      background-color: white;
+      color: black;
+      padding: 2rem;
+    }
+    footer {
+      background-color: #000;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .header-info {
+      font-weight: bold;
+      font-size: 1.8rem;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-top: 20px;
+      cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    }
+    .toggle-arrow {
+      margin-right: 10px;
+      transition: transform 0.2s; /* Animação suave na rotação */
+      display: inline-block; /* Certifique-se de que a seta está alinhada */
+      color: #002244; /* Change arrow color here */
+    }
+    .card {
+      border: none;
+      display: block; /* Inicialmente mostrar as seções */
+    }
+    .status-badge {
+      font-weight: bold;
+    }
+    /* Rotate down for open state */
+    .rotated {
+      transform: rotate(90deg); /* Rotação de 90 graus quando a seção está aberta */
+    }
+  </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Header Section -->
+    <header class="d-flex align-items-center p-3" style="background-color: #002244;">
+      <img src="./logo.png" alt="Tractian Logo" style="height: 90px;">
+    </header>
+
+  <!-- Informações da Ordem de Serviço -->
+  <div class="container header-info pt-4">
+    <span>Ordem de Serviço: #977</span>
+    <span>Data de Vencimento: 02/11/2024</span>
+  </div>
+
+  <!-- Main Section -->
+  <main class="container">
+
+    <!-- Título e Informações Básicas -->
+    <h2 class="section-title">
+      <span class="toggle-arrow rotated">►</span> Informações Gerais
+    </h2>
+    <div class="card p-3 mb-3">
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Título</strong>: Inspeção Sensitiva Motor 150CV</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Responsáveis</strong>: OPERAÇÃO</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Status</strong>: <span class="badge badge-warning status-badge">Em Aberto</span></p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Categoria</strong>: GR - GERAL</p>
+        </div>
+      </div>
+      <p><strong>Tags</strong>: Sensitiva</p>
+      <p class="text-right">Criado por Calendário em 28 de Out de 2024 às 07:01</p>
+    </div>
+
+    <!-- Ativo Section -->
+    <h2 class="section-title">
+      <span class="toggle-arrow rotated">►</span> Ativo
+    </h2>
+    <div class="card p-3 mb-3">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="https://via.placeholder.com/150" alt="Motor Image" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+          <p><strong>Nome</strong>: TMD BRASIL 2024 / 1. FACTORY / 102 Motor Elétrico Trifásico</p>
+          <p><strong>Modelo</strong>: Motor Trifásico</p>
+          <p><strong>Tags</strong>: N/A</p>
+        </div>
+        <div class="col-md-3 text-right">
+          <img src="https://via.placeholder.com/100" alt="QR Code" class="img-fluid">
+        </div>
+      </div>
+    </div>
+
+    <!-- Atividades Section -->
+    <h2 class="section-title">
+      <span class="toggle-arrow rotated">►</span> Atividades
+    </h2>
+    <div class="card p-3 mb-3">
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Título</strong>: Realizar a inspeção sensitiva - 010</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Tipo de Atividade</strong>: #7 IE: INSPEÇÃO DE EQUIPAMENTOS</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Status</strong>: <span class="badge badge-secondary">Não Iniciada</span></p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Valores estimados de:</strong></p>
+          <p>Horas: 10min | Executante: 1</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Data de Início Programada</strong>: -</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Data de Fim Programada</strong>: -</p>
+        </div>
+      </div>
+      <p><strong>Executante</strong>: -</p>
+    </div>
+
+    <!-- Procedimentos Section -->
+    <h2 class="section-title">
+      <span class="toggle-arrow rotated">►</span> Procedimentos
+    </h2>
+    <div class="card p-3 mb-3">
+      <p><strong>Título</strong>: Procedimento de Inspeção Sensitiva para Compressores de Alta</p>
+    </div>
+
+    <!-- Descrição, Local e Preparação -->
+    <div class="card p-3 mb-3">
+      <div class="row">
+        <div class="col-md-8">
+          <p><strong>Descrição</strong>: Este procedimento descreve as etapas para realizar uma inspeção sensitiva em compressores de alta, utilizando os sentidos do técnico para identificar sinais de desgaste, mau funcionamento ou ineficiência.</p>
+        </div>
+        <div class="col-md-4">
+          <p><strong>Local</strong>: -</p>
+        </div>
+      </div>
+      <p><strong>Atividade</strong>: Realizar a inspeção sensitiva - 010</p>
+    </div>
+
+    <!-- Preparação Section -->
+    <h2 class="section-title">
+      <span class="toggle-arrow rotated">►</span> Preparação
+    </h2>
+    <div class="card p-3 mb-3">
+      <p><strong>1. Equipamentos de Segurança e Ferramentas Necessárias</strong></p>
+      <ul class="list-unstyled">
+        <li><input type="checkbox"> Equipamento de Proteção Individual (EPI): luvas, óculos de proteção, protetores auriculares.</li>
+        <li><input type="checkbox"> Ferramentas de medição de temperatura (termômetro infravermelho).</li>
+        <li><input type="checkbox"> Equipamento de detecção de vibração (acelerômetro).</li>
+        <li><input type="checkbox"> Lanterna para inspeção visual.</li>
+        <li><input type="checkbox"> Kit de bloqueio e etiquetagem (LOTO).</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="mt-auto">
+    <p>&copy; 2024 Website Hackathon Tractian-SECOMP. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // JavaScript para o dropdown
+    document.querySelectorAll('.section-title').forEach(title => {
+      title.addEventListener('click', () => {
+        const card = title.nextElementSibling; // Seleciona o próximo elemento que é a div card
+        const arrow = title.querySelector('.toggle-arrow');
+        
+        card.style.display = card.style.display === 'block' ? 'none' : 'block'; // Alterna a exibição da card
+        arrow.classList.toggle('rotated'); // Alterna a classe para rotacionar a seta
+      });
+    });
+  </script>
+
+</body>
+</html>
