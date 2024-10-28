@@ -8,7 +8,7 @@
   <style>
     /* Custom styles */
     body {
-      font-size: 1.5rem; /* Define o tamanho de fonte maior para todo o corpo */
+      font-size: 1.5rem;
     }
     header {
       background-color: #002244;
@@ -38,24 +38,24 @@
     .section-title {
       font-weight: bold;
       margin-top: 20px;
-      cursor: pointer; /* Muda o cursor para indicar que é clicável */
+      cursor: pointer;
     }
     .toggle-arrow {
       margin-right: 10px;
-      transition: transform 0.2s; /* Animação suave na rotação */
-      display: inline-block; /* Certifique-se de que a seta está alinhada */
-      color: #002244; /* Change arrow color here */
+      transition: transform 0.2s;
+      display: inline-block;
+      color: #002244;
     }
     .card {
       border: none;
-      display: block; /* Inicialmente mostrar as seções */
+      display: block; /* Mantém as seções abertas inicialmente */
     }
     .status-badge {
       font-weight: bold;
     }
-    /* Rotate down for open state */
+    /* Rotacionar a seta inicialmente */
     .rotated {
-      transform: rotate(90deg); /* Rotação de 90 graus quando a seção está aberta */
+      transform: rotate(90deg);
     }
   </style>
 </head>
@@ -159,19 +159,17 @@
     </h2>
     <div class="card p-3 mb-3">
       <p><strong>Título</strong>: Procedimento de Inspeção Sensitiva para Compressores de Alta</p>
-    </div>
-
-    <!-- Descrição, Local e Preparação -->
-    <div class="card p-3 mb-3">
-      <div class="row">
-        <div class="col-md-8">
-          <p><strong>Descrição</strong>: Este procedimento descreve as etapas para realizar uma inspeção sensitiva em compressores de alta, utilizando os sentidos do técnico para identificar sinais de desgaste, mau funcionamento ou ineficiência.</p>
+      <div class="card p-3 mb-3">
+        <div class="row">
+          <div class="col-md-8">
+            <p><strong>Descrição</strong>: Este procedimento descreve as etapas para realizar uma inspeção sensitiva em compressores de alta, utilizando os sentidos do técnico para identificar sinais de desgaste, mau funcionamento ou ineficiência.</p>
+          </div>
+          <div class="col-md-4">
+            <p><strong>Local</strong>: -</p>
+          </div>
         </div>
-        <div class="col-md-4">
-          <p><strong>Local</strong>: -</p>
-        </div>
+        <p><strong>Atividade</strong>: Realizar a inspeção sensitiva - 010</p>
       </div>
-      <p><strong>Atividade</strong>: Realizar a inspeção sensitiva - 010</p>
     </div>
 
     <!-- Preparação Section -->
@@ -200,11 +198,14 @@
     // JavaScript para o dropdown
     document.querySelectorAll('.section-title').forEach(title => {
       title.addEventListener('click', () => {
-        const card = title.nextElementSibling; // Seleciona o próximo elemento que é a div card
+        const card = title.nextElementSibling;
         const arrow = title.querySelector('.toggle-arrow');
         
-        card.style.display = card.style.display === 'block' ? 'none' : 'block'; // Alterna a exibição da card
-        arrow.classList.toggle('rotated'); // Alterna a classe para rotacionar a seta
+        // Alterna a visibilidade
+        card.style.display = (card.style.display === 'none') ? 'block' : 'none';
+        
+        // Alterna a seta
+        arrow.classList.toggle('rotated');
       });
     });
   </script>
